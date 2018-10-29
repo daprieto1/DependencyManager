@@ -1,0 +1,60 @@
+:remote connect tinkerpop.server conf/remote-secure.yaml
+:remote console
+
+g.addV('product').property('id', 'runbaseline_v1'       ).property('name', 'runbaseline'      ).property('version', 1)
+g.addV('product').property('id', 'runbaselineregion_v1' ).property('name', 'runbaselineregion').property('version', 1)
+
+g.addV('product').property('id', 'general_v1'       ).property('name', 'general'      ).property('version', 1)
+g.addV('product').property('id', 'accounts_v1'      ).property('name', 'accounts'     ).property('version', 1)
+g.addV('product').property('id', 'catalog_v1'       ).property('name', 'catalog'      ).property('version', 1)
+g.addV('product').property('id', 'shardmanager_v1'  ).property('name', 'shardmanager' ).property('version', 1)
+g.addV('product').property('id', 'platform_v1'      ).property('name', 'platform'     ).property('version', 1)
+g.addV('product').property('id', 'modeler_v1'       ).property('name', 'modeler'      ).property('version', 1)
+g.addV('product').property('id', 'modelerregion_v1' ).property('name', 'modelerregion').property('version', 1)
+
+g.addV('product').property('id', 'webanalitics_v1'  ).property('name', 'webanalitics' ).property('version', 1)
+g.addV('product').property('id', 'modelerregion_v2' ).property('name', 'modelerregion').property('version', 2)
+
+g.addV('product').property('id', 'build_v1' ).property('name', 'build').property('version', 1)
+
+g.V('runbaselineregion_v1').addE('depends').to(g.V('runbaseline_v1' ))
+
+g.V('accounts_v1'     ).addE('depends').to(g.V('general_v1' ))
+
+g.V('catalog_v1'      ).addE('depends').to(g.V('accounts_v1'))
+
+g.V('shardmanager_v1' ).addE('depends').to(g.V('accounts_v1'))
+g.V('shardmanager_v1' ).addE('depends').to(g.V('catalog_v1' ))
+
+g.V('platform_v1'     ).addE('depends').to(g.V('general_v1' ))
+g.V('platform_v1'     ).addE('depends').to(g.V('accounts_v1'))
+
+g.V('modeler_v1'      ).addE('depends').to(g.V('general_v1' ))
+g.V('modeler_v1'      ).addE('depends').to(g.V('accounts_v1'))
+g.V('modeler_v1'      ).addE('depends').to(g.V('platform_v1' ))
+
+g.V('modelerregion_v1').addE('depends').to(g.V('general_v1'     ))
+g.V('modelerregion_v1').addE('depends').to(g.V('catalog_v1'     ))
+g.V('modelerregion_v1').addE('depends').to(g.V('shardmanager_v1'))
+g.V('modelerregion_v1').addE('depends').to(g.V('accounts_v1'    ))
+g.V('modelerregion_v1').addE('depends').to(g.V('platform_v1'    ))
+g.V('modelerregion_v1').addE('depends').to(g.V('modeler_v1'     ))
+
+g.V('webanalitics_v1').addE('depends').to(g.V('general_v1' ))
+g.V('webanalitics_v1').addE('depends').to(g.V('accounts_v1'))
+g.V('webanalitics_v1').addE('depends').to(g.V('platform_v1' ))
+
+g.V('modelerregion_v2').addE('depends').to(g.V('general_v1'     ))
+g.V('modelerregion_v2').addE('depends').to(g.V('catalog_v1'     ))
+g.V('modelerregion_v2').addE('depends').to(g.V('shardmanager_v1'))
+g.V('modelerregion_v2').addE('depends').to(g.V('accounts_v1'    ))
+g.V('modelerregion_v2').addE('depends').to(g.V('platform_v1'    ))
+g.V('modelerregion_v2').addE('depends').to(g.V('modeler_v1'     ))
+g.V('modelerregion_v2').addE('depends').to(g.V('webanalitics_v1'))
+
+g.V('build_v1'        ).addE('depends').to(g.V('general_v1'     ))
+g.V('build_v1'        ).addE('depends').to(g.V('catalog_v1'     ))
+g.V('build_v1'        ).addE('depends').to(g.V('shardmanager_v1'))
+g.V('build_v1'        ).addE('depends').to(g.V('accounts_v1'    ))
+g.V('build_v1'        ).addE('depends').to(g.V('platform_v1'    ))
+
