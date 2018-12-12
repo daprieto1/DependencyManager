@@ -5,11 +5,11 @@
       "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
-      "name": "req",
+      "name": "req",      
       "methods": [
         "get"
       ],
-      "route": "products/{name}"
+      "route": "products/{channel}/{productName}"
     },
     {
       "type": "http",

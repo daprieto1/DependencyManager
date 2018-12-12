@@ -9,7 +9,7 @@
       "methods": [
         "get"
       ],
-      "route": "products/{name}/{version}/dependencies"
+      "route": "products/{productName}/{version}/dependencies"
     },
     {
       "type": "http",

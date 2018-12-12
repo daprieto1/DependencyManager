@@ -1,12 +1,11 @@
-const Product = require('../Commons/Models/Product');
-const TopologicalSortProvider = require('../Commons/Providers/TopologicalSortProvider');
+const ProductProvider = require('../Commons/Providers/ProductProvider');
 
 module.exports = async function (context, req) {
 
-    let nameValue = context.bindingData.name.toLowerCase();
-    let versionValue = parseInt(context.bindingData.version);
+    let productName = context.bindingData.productName;
+    let version = context.bindingData.version;
 
-    let result = await TopologicalSortProvider.sortFromVertex(new Product(nameValue, versionValue));
+    let result = await ProductProvider.getProductDependencies(productName, version);
     context.res = { body: result }
 
 };

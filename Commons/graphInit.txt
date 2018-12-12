@@ -45,9 +45,9 @@ g.V('webanalitics_v1').addE('depends').to(g.V('accounts_v1'))
 g.V('webanalitics_v1').addE('depends').to(g.V('platform_v1' ))
 
 g.V('modelerregion_v2').addE('depends').to(g.V('general_v1'     ))
+g.V('modelerregion_v2').addE('depends').to(g.V('accounts_v1'    ))
 g.V('modelerregion_v2').addE('depends').to(g.V('catalog_v1'     ))
 g.V('modelerregion_v2').addE('depends').to(g.V('shardmanager_v1'))
-g.V('modelerregion_v2').addE('depends').to(g.V('accounts_v1'    ))
 g.V('modelerregion_v2').addE('depends').to(g.V('platform_v1'    ))
 g.V('modelerregion_v2').addE('depends').to(g.V('modeler_v1'     ))
 g.V('modelerregion_v2').addE('depends').to(g.V('webanalitics_v1'))
@@ -57,4 +57,14 @@ g.V('build_v1'        ).addE('depends').to(g.V('catalog_v1'     ))
 g.V('build_v1'        ).addE('depends').to(g.V('shardmanager_v1'))
 g.V('build_v1'        ).addE('depends').to(g.V('accounts_v1'    ))
 g.V('build_v1'        ).addE('depends').to(g.V('platform_v1'    ))
+
+
+g.V().not(__.inE()).store("x").
+           repeat(outE().store("e").inV().not(inE().where(without(cap("e")))).store("x")).
+         cap("x")
+
+g.V().not(__.inE()).store("x").repeat(outE().store("e").inV().not(inE().where(within(cap("e")))).store("x")).cap("x")
+g.V().out().where(whitin(g.V())) properties('id').store("x").where().cap.
+
+g.V().inE()
 
